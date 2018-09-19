@@ -1,13 +1,11 @@
 import React from "react"
 import ReactDOM from "react-dom"
-import {combineReducers, createStore} from "redux"
 import {Provider} from "react-redux"
+import initializeStore from "../store/index"
 
-
-const reducers = combineReducers({})
 
 ReactDOM.render(
-    <Provider store={createStore(reducers)} >
+    <Provider store={initializeStore} >
     </Provider>
     , document.getElementById('root')
 )
