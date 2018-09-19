@@ -14,10 +14,10 @@ module.exports = {
     },
     output : {
         filename: 'principal.js',
-        path: __dirname + '/public'
+        path: __dirname + '/app/client/dist'
     },    
     devServer: {
-        contentBase: "./public",
+        contentBase: __dirname + '/app/client/dist',
         port: 8000
     },
     resolve: {
