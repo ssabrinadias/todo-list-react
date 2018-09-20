@@ -1,10 +1,14 @@
-const INITIAL_STATE = { value: "estou funcionando..." };
+const INITIAL_STATE = {
+	period: "day",
+	tags: [],
+	done: false
+};
 
 export default (state = INITIAL_STATE, action) => {
 	switch (action.type) {
-		case "CHANGE_SAUDACAO":
+		case "CHANGE_FILTERS":
 			return {
-				value: "teste"
+				value: "FILTER"
 			};
 		default:
 			return state;
