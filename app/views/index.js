@@ -1,12 +1,12 @@
-import React from "react";
+import React, { Component } from "react";
 import ReactDOM from "react-dom";
-import { Provider } from "react-redux";
-import initializeStore from "../store/index";
-import Content from "../components/content";
+import { Layout } from "../components/layout";
+import App from "../views/_app";
 
-ReactDOM.render(
-	<Provider store={initializeStore}>
-		<Content />
-	</Provider>,
-	document.getElementById("root")
-);
+class Content extends Component {
+	render() {
+		return <Layout>BumBum</Layout>;
+	}
+}
+
+App(Content);
