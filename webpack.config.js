@@ -10,14 +10,14 @@ const environment = process.env.NODE_ENV !== "production";
 module.exports = {
 	mode: environment ? "development" : "production",
 	entry: {
-		index: path.resolve("./app/client/views/index.js")
+		index: path.resolve("./app/views/index.js")
 	},
 	output: {
 		filename: "principal.js",
-		path: __dirname + "/app/client/dist"
+		path: __dirname + "/app/dist"
 	},
 	devServer: {
-		contentBase: __dirname + "/app/client/dist",
+		contentBase: __dirname + "/app/dist",
 		port: 8000
 	},
 	resolve: {
@@ -62,7 +62,6 @@ module.exports = {
 					MiniCssExtractPlugin.loader,
 					// 'style-loader',
 					"css-loader",
-					"postcss-loader",
 					"sass-loader"
 				]
 			},
