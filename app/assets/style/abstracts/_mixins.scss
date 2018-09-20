@@ -1,0 +1,17 @@
+@mixin breakpoint($point) {
+    @if $point == nano {
+        @media only screen and (max-width: 405px)  { @content; }
+    }
+    @if $point == small {
+        @media only screen and (max-width: 599px)  { @content; }
+    }
+    @if $point == medium {
+        @media only screen and (min-width: 600px) { @content; }
+    }  
+    @if $point == large {
+        @media only screen and (min-width: 900px) { @content; }
+    }   
+    @if $point == hero {
+        @media only screen and (min-width: 1200) and (max-width: 99.9375em) { @content; }
+    }
+}

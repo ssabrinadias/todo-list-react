@@ -1,0 +1,15 @@
+%defaultPadding {    
+    padding-left: 25px;
+    padding-right: 25px;
+    @media only screen and (min-width: 600px) {        
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+}
+
+%transition {
+    -moz-transition: 0.4s;
+    -o-transition: 0.4s;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+}

@@ -1,0 +1,14 @@
+@import "../../assets/style/abstracts/_supports";
+
+%common {
+  display: flex;
+  width: 100%;
+  max-width: 1260px;
+  min-width: 360px;
+  margin: auto;
+  box-sizing: border-box;
+}
+.container {
+  @extend %common;
+  @extend %defaultPadding;
+}
