@@ -6,7 +6,7 @@ async function get(req, res, next) {
 			`http://5ba1adacee710f0014dd767e.mockapi.io/tasks/${req.params.id || ""}`
 		)
 		.then(function(response) {
-			console.log(response.data);
+			res.json(response.data);
 			return next();
 		})
 		.catch(function(error) {
@@ -34,7 +34,7 @@ async function edit(req, res, next) {
 	return await axios
 		.put(`http://5ba1adacee710f0014dd767e.mockapi.io/tasks/${req.params.id}`, {
 			name: "teste",
-			color: "rola"
+			color: "teste"
 		})
 		.then(function(response) {
 			console.log(response.data);

@@ -1,0 +1,35 @@
+.list-group {
+    margin-top: 20px;
+    &__list {
+        display: flex;
+        justify-content: space-around;
+        flex-flow: row wrap;
+        align-items: stretch;
+        &__col {
+            &:nth-child(1){
+                flex-basis: 35px;
+            }
+            
+            &:nth-child(2){
+                flex: 3;
+            }
+            
+            &:nth-child(3){
+                flex: 1;
+            }
+            
+            &:nth-child(4){
+                flex-basis: 100px;
+                display: flex;
+                justify-content: space-around;
+            }
+
+            &:nth-child(5){
+                flex: 1 100%;
+            }
+        }
+    }
+    .badge {
+        margin-right: 10px; 
+    }
+}

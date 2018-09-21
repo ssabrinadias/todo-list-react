@@ -6,9 +6,10 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
 	switch (action.type) {
-		case "CHANGE_FILTERS":
+		case "CHANGE_PERIOD":
 			return {
-				value: "FILTER"
+				...state,
+				period: action.value
 			};
 		default:
 			return state;
