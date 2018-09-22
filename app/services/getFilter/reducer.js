@@ -1,7 +1,9 @@
 const INITIAL_STATE = {
-	period: "day",
-	tags: [],
-	done: false
+	period: {
+		status: "day"
+	},
+	tags: "",
+	done: "all"
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -9,7 +11,10 @@ export default (state = INITIAL_STATE, action) => {
 		case "CHANGE_PERIOD":
 			return {
 				...state,
-				period: action.value
+				period: {
+					...state.period,
+					status: action.value
+				}
 			};
 		default:
 			return state;

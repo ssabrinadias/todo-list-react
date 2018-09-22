@@ -12,14 +12,14 @@ const PeriodFilter = (props) => {
 	const periods = {
 		'Dia' : 'day',
 		'Semana' : 'week',
-		'Mês' : 'mounth'
+		'Mês' : 'month'
 	}
 	
 	const createButton = ({value, id}) =>(
 		<Button
 			key={id}
 			value = {id}
-			className={props.filters.period === id? 'active':''}
+			className={props.filters.period.status === id? 'active':''}
 			onClick={({target})=>props.periodAction(target.value)}
 		>
 			{value}

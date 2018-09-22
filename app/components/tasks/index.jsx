@@ -11,21 +11,26 @@ const Tasks = (props) => {
 	return (
         <ListGroup className="list-group">
             <ListGroup.Item>
-                <ul className='list-group__list'>
-                    <li className='list-group__list__col'>
-                        <input type='checkbox'/>
-                    </li>
-                    <li className='list-group__list__col'>Tomar banho</li>
-                    <li className='list-group__list__col'>11/11/11</li>
-                    <li className='list-group__list__col'>
-                        <Button variant="primary"><FaEdit/></Button>
-                        <Button variant="primary"><FaTrash/></Button>
-                    </li>
-                    <li className='list-group__list__col'>
-                        <Badge variant="info">saúde</Badge>
-                        <Badge variant="danger">preguiça</Badge>
-                    </li>
-                </ul>
+                {
+                    Object.entries(props.filteredTasks || [])
+                    .map(([chave, valor],id)=> (
+                        <ul className='list-group__list' key={id}>
+                            <li className='list-group__list__col'>
+                                <input type='checkbox'/>
+                            </li>
+                            <li className='list-group__list__col'>{valor.title}</li>
+                            <li className='list-group__list__col'>{valor.date}</li>
+                            <li className='list-group__list__col'>
+                                <Button variant="primary"><FaEdit/></Button>
+                                <Button variant="primary"><FaTrash/></Button>
+                            </li>
+                            <li className='list-group__list__col'>
+                                <Badge variant="info">Estudos</Badge>
+                                <Badge variant="danger">Faculdade</Badge>
+                            </li>
+                        </ul>
+                    ))
+                }
             </ListGroup.Item>
         </ListGroup>
     )

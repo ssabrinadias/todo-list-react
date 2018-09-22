@@ -5,7 +5,12 @@ const tags = require("./routes/tags");
 const tasks = require("./routes/tasks");
 const app = express();
 
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(function(req, res, next) {
+	res.header("Access-Control-Allow-Origin", "http://localhost:8000");
+	res.header("Access-Control-Allow-Headers", "*");
+	next();
+});
 
 app.use("/tags", tags);
 app.use("/tasks", tasks);

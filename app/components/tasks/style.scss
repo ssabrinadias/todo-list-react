@@ -5,6 +5,11 @@
         justify-content: space-around;
         flex-flow: row wrap;
         align-items: stretch;
+        padding: 10px 0; 
+        border-bottom: 1px solid #ccc;
+        &:last-child {
+            border: none;
+        }
         &__col {
             &:nth-child(1){
                 flex-basis: 35px;

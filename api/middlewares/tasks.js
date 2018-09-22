@@ -6,8 +6,7 @@ async function get(req, res, next) {
 			`http://5ba1adacee710f0014dd767e.mockapi.io/tasks/${req.params.id || ""}`
 		)
 		.then(function(response) {
-			res.json(response.data);
-			return next();
+			return res.json(response.data);
 		})
 		.catch(function(error) {
 			return error;
