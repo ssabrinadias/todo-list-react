@@ -1,14 +1,13 @@
-import React, { Component } from "react";
+import React from "react";
 import ReactDOM from "react-dom";
 import style from "./style.scss";
-import {connect} from 'react-redux'
-import {bindActionCreators} from 'redux'
 import { ListGroup, Badge, Button } from 'react-bootstrap';
 import { FaEdit, FaTrash} from 'react-icons/fa';
 
 
-const Tasks = (props) => {
-	return (
+
+const tasks = (props) => {
+    return (
         <ListGroup className="list-group">
             <ListGroup.Item>
                 {
@@ -36,10 +35,5 @@ const Tasks = (props) => {
     )
 };
 
-const mapStateToProps = state => state;
 
-// const mapDispatchToProps = (dispach) => {
-//     return bindActionCreators({periodAction},dispach)
-// }
-
-export default connect(mapStateToProps)(Tasks);
+export default tasks

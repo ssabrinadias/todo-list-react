@@ -1,8 +1,6 @@
 const INITIAL_STATE = {
-	period: {
-		status: "day",
-		date: ""
-	},
+	date: "",
+	period: "day",
 	tags: "",
 	done: "all"
 };
@@ -12,10 +10,12 @@ export default (state = INITIAL_STATE, action) => {
 		case "CHANGE_PERIOD":
 			return {
 				...state,
-				period: {
-					...state.period,
-					status: action.value
-				}
+				period: action.value
+			};
+		case "CHANGE_DATE":
+			return {
+				...state,
+				date: action.value
 			};
 		default:
 			return state;

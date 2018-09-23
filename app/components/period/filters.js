@@ -19,8 +19,8 @@ const week = date => {
 	return initialDate;
 };
 
-const dateType = ({ dateItem, status, dates }) => {
-	switch (status) {
+const dateType = ({ dateItem, period, dates }) => {
+	switch (period) {
 		case "week":
 			return dates.indexOf(dateItem) != -1;
 		case "month":
@@ -31,22 +31,19 @@ const dateType = ({ dateItem, status, dates }) => {
 	}
 };
 
-export const periodFilter = ({ status, date, tasks }) => {
+export const periodFilter = ({ period, date, tasks }) => {
+	console.log("date", date);
 	const weekGroup = status === "week" && week(date);
-
+	console.log(period);
 	const filteredTasks = Object.values(tasks).filter(item => {
 		return dateType({
 			dateItem: item.date,
-			status,
+			period,
 			dates: weekGroup || date
 		});
 	});
 
 	return {
-		period: {
-			status,
-			date
-		},
 		filteredTasks
 	};
 };

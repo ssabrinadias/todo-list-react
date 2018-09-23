@@ -6,9 +6,9 @@ import { bindActionCreators } from "redux";
 import App from "../views/_app";
 import { Layout } from "../components/layout";
 import { Container } from "../components/container";
-import PeriodChange from "../components/period";
+import Period from "../components/period";
 import { periodFilter } from "../components/period/filters";
-import DateChange from "../components/date";
+import Date, { getDate, dispatchDate } from "../components/date";
 import Tasks from "../components/tasks";
 import { tasksAction } from "../components/tasks/action";
 
@@ -17,25 +17,22 @@ class Home extends Component {
 		super(props);
 
 		this.state = {
-			tags: null,
-			period: {
-				status: null
-			},
-			done: null,
 			filteredTasks: null
 		};
 	}
 
-	componentDidUpdate() {
-		//period filter
-		if (this.props.filters.period.status !== this.state.period.status) {
-			this.setState(
-				periodFilter({
-					status: this.props.filters.period.status,
-					tasks: this.props.tasks,
-					date: "22/9/2018"
-				})
-			);
+	changePeriod() {
+		return this.setState(
+			periodFilter({
+				period: this.props.filters.period,
+				tasks: this.props.tasks,
+				date: this.props.filters.date
+			})
+		);
+	}
+	componentDidUpdate(oldProps) {
+		if (oldProps.filters != this.props.filters) {
+			this.changePeriod();
 		}
 	}
 
@@ -44,6 +41,7 @@ class Home extends Component {
 			.get("http://localhost:3000/tasks")
 			.then(res => {
 				this.props.tasksAction(res.data);
+				this.props.dispatchDate(getDate());
 			})
 			.catch(err => console.log(err));
 	}
@@ -52,8 +50,8 @@ class Home extends Component {
 		return (
 			<Layout>
 				<Container>
-					<PeriodChange />
-					<DateChange />
+					<Period />
+					<Date />
 					<Tasks filteredTasks={this.state.filteredTasks} />
 				</Container>
 			</Layout>
@@ -64,7 +62,13 @@ class Home extends Component {
 const mapStateToProps = state => state;
 
 const mapDispatchToProps = dispach => {
-	return bindActionCreators({ tasksAction }, dispach);
+	return bindActionCreators(
+		{
+			tasksAction,
+			dispatchDate
+		},
+		dispach
+	);
 };
 App(
 	connect(

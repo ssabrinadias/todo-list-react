@@ -19,7 +19,7 @@ const Period = (props) => {
 		<Button
 			key={id}
 			value = {id}
-			className={props.filters.period.status === id? 'active':''}
+			className={props.filters.period === id? 'active':''}
 			onClick={({target})=>props.periodAction(target.value)}
 		>
 			{value}
