@@ -6,10 +6,11 @@ import { bindActionCreators } from "redux";
 import App from "../views/_app";
 import { Layout } from "../components/layout";
 import { Container } from "../components/container";
-import PeriodFilter from "../components/periodFilter";
+import PeriodChange from "../components/period";
+import { periodFilter } from "../components/period/filters";
+import DateChange from "../components/date";
 import Tasks from "../components/tasks";
-import { tasksAction } from "../services/getTasks/action";
-import moment from "moment";
+import { tasksAction } from "../components/tasks/action";
 
 class Home extends Component {
 	constructor(props) {
@@ -21,53 +22,19 @@ class Home extends Component {
 				status: null
 			},
 			done: null,
-			filteredTasks: null,
-			tasks: {}
+			filteredTasks: null
 		};
-	}
-
-	periodFilter(status, date) {
-		date = date || moment().format("D/M/YYYY");
-		const weeks = {
-			Monday: 1,
-			Tuesday: 2,
-			Wednesday: 3,
-			Thursday: 4,
-			Friday: 5,
-			Saturday: 6,
-			Sunday: 7
-		};
-		const typeDate = type => {
-			switch (status) {
-				case "week":
-					let week = moment(date, "D/M/YYYY").format("dddd");
-					console.log("oi", week);
-					return true;
-				case "month":
-					const month = moment(date, "D/M/YYYY").format("M");
-					return true;
-				case "day":
-					return true;
-			}
-		};
-		console.log(this.props.tasks);
-		const filteredTasks = Object.values(this.props.tasks).filter(item =>
-			typeDate(item.date)
-		);
-
-		return this.setState({
-			period: {
-				status,
-				date
-			},
-			filteredTasks
-		});
 	}
 
 	componentDidUpdate() {
-		//filter period
+		//period filter
 		if (this.props.filters.period.status !== this.state.period.status) {
-			this.periodFilter(this.props.filters.period.status);
+			this.setState(
+				periodFilter({
+					status: this.props.filters.period.status,
+					tasks: this.props.tasks
+				})
+			);
 		}
 	}
 
@@ -75,23 +42,17 @@ class Home extends Component {
 		axios
 			.get("http://localhost:3000/tasks")
 			.then(res => {
-				console.log("aqui");
 				this.props.tasksAction(res.data);
-
-				this.setState({
-					filteredTasks: res.data,
-					tasks: res.data
-				});
 			})
 			.catch(err => console.log(err));
 	}
 
 	render() {
-		console.log(this.state.filteredTasks);
 		return (
 			<Layout>
 				<Container>
-					<PeriodFilter />
+					<PeriodChange />
+					<DateChange />
 					<Tasks filteredTasks={this.state.filteredTasks} />
 				</Container>
 			</Layout>

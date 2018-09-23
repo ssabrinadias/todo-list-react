@@ -3,7 +3,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
 
 import filters from "../services/getFilter/reducer";
-import tasks from "../services/getTasks/reducers";
+import tasks from "../components/tasks/reducers";
 
 const INITIAL_STATE = {};
 

@@ -1,6 +1,7 @@
 const INITIAL_STATE = {
 	period: {
-		status: "day"
+		status: "day",
+		date: ""
 	},
 	tags: "",
 	done: "all"
