@@ -32,7 +32,8 @@ class Home extends Component {
 			this.setState(
 				periodFilter({
 					status: this.props.filters.period.status,
-					tasks: this.props.tasks
+					tasks: this.props.tasks,
+					date: "22/9/2018"
 				})
 			);
 		}

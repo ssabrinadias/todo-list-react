@@ -1,7 +1,8 @@
 @import "../../assets/style/abstracts/_supports";
 
 %common {
-  display: block;
+  display: flex;
+  flex-wrap: wrap;
   width: 100%;
   max-width: 1260px;
   min-width: 360px;

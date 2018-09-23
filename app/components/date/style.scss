@@ -1,3 +1,21 @@
-.period-filter {
+.date {
     display: flex;
+    flex-basis: 160px;
+    flex-wrap: wrap;
+    &__button {
+        flex: 1;
+        border: none;
+        background: none;
+        cursor: pointer;
+        color: #666;
+    }
+    &__display {
+        flex: 1;
+    }
+    &__info {
+        flex: 1 100%;
+        text-align: center;
+        color: #999;
+        font-size: 0.8em;
+    }
 }

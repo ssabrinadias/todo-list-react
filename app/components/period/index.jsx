@@ -7,7 +7,7 @@ import { Button, ButtonGroup } from 'react-bootstrap';
 import {periodAction} from './action';
 
 
-const PeriodFilter = (props) => {
+const Period = (props) => {
 
 	const periods = {
 		'Dia' : 'day',
@@ -26,7 +26,7 @@ const PeriodFilter = (props) => {
 		</Button>
 	)
 
-	return <div className="period-filter">
+	return <div className="period">
 		<ButtonGroup aria-label="Basic example">
 			{
 				Object.entries(periods)
@@ -44,4 +44,4 @@ const mapDispatchToProps = (dispach) => {
     return bindActionCreators({periodAction},dispach)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PeriodFilter);
+export default connect(mapStateToProps, mapDispatchToProps)(Period);

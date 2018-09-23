@@ -4,7 +4,7 @@ import style from "./style.scss";
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import { ListGroup, Badge, Button } from 'react-bootstrap';
-import { FaEdit, FaTrash } from 'react-icons/fa';
+import { FaEdit, FaTrash} from 'react-icons/fa';
 
 
 const Tasks = (props) => {

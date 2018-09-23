@@ -32,7 +32,6 @@ const dateType = ({ dateItem, status, dates }) => {
 };
 
 export const periodFilter = ({ status, date, tasks }) => {
-	date = date || moment().format("D/M/YYYY");
 	const weekGroup = status === "week" && week(date);
 
 	const filteredTasks = Object.values(tasks).filter(item => {
