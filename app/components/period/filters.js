@@ -19,24 +19,26 @@ const week = date => {
 	return initialDate;
 };
 
-const dateType = ({ dateItem, period, dates }) => {
+const periodType = ({ dateItem, period, dates }) => {
 	switch (period) {
 		case "week":
 			return dates.indexOf(dateItem) != -1;
 		case "month":
 			// const month = moment(date, "D/M/YYYY").format("M");
-			return true;
+			return (
+				moment(dateItem, "D/M/YYYY").format("M") ===
+				moment(dates, "D/M/YYYY").format("M")
+			);
 		case "day":
 			return dateItem == dates;
 	}
 };
 
-export const periodFilter = ({ period, date, tasks }) => {
-	console.log("date", date);
-	const weekGroup = status === "week" && week(date);
-	console.log(period);
+export const methodPeriodFilter = ({ period, date, tasks }) => {
+	const weekGroup = period === "week" && week(date);
 	const filteredTasks = Object.values(tasks).filter(item => {
-		return dateType({
+		moment.locale("pt-br");
+		return periodType({
 			dateItem: item.date,
 			period,
 			dates: weekGroup || date
@@ -44,6 +46,7 @@ export const periodFilter = ({ period, date, tasks }) => {
 	});
 
 	return {
-		filteredTasks
+		filteredTasks,
+		dateShow: weekGroup || date
 	};
 };

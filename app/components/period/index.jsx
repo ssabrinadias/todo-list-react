@@ -5,6 +5,7 @@ import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import { Button, ButtonGroup } from 'react-bootstrap';
 import {periodAction} from './action';
+import {methodPeriodFilter} from './filters';
 
 
 const Period = (props) => {
@@ -44,4 +45,11 @@ const mapDispatchToProps = (dispach) => {
     return bindActionCreators({periodAction},dispach)
 }
 
+
+
+// filter method
+export const periodFilter = methodPeriodFilter;
+//method dispach
+export const dispatchPeriod = periodAction;
+//date component
 export default connect(mapStateToProps, mapDispatchToProps)(Period);

@@ -4,35 +4,30 @@ import axios from "axios";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import App from "../views/_app";
-import { Layout } from "../components/layout";
-import { Container } from "../components/container";
-import Period from "../components/period";
-import { periodFilter } from "../components/period/filters";
+import { Layout, Container } from "../designStructure";
+import Period, { periodFilter } from "../components/period";
 import Date, { getDate, dispatchDate } from "../components/date";
-import Tasks from "../components/tasks";
-import { tasksAction } from "../components/tasks/action";
+import Tasks, { dispatchTasks } from "../components/tasks";
 
 class Home extends Component {
 	constructor(props) {
 		super(props);
 
 		this.state = {
-			filteredTasks: null
+			filteredTasks: null,
+			dateShow: null
 		};
 	}
 
-	changePeriod() {
-		return this.setState(
-			periodFilter({
-				period: this.props.filters.period,
-				tasks: this.props.tasks,
-				date: this.props.filters.date
-			})
-		);
-	}
 	componentDidUpdate(oldProps) {
 		if (oldProps.filters != this.props.filters) {
-			this.changePeriod();
+			this.setState(
+				periodFilter({
+					period: this.props.filters.period,
+					tasks: this.props.tasks,
+					date: this.props.filters.date
+				})
+			);
 		}
 	}
 
@@ -40,7 +35,7 @@ class Home extends Component {
 		axios
 			.get("http://localhost:3000/tasks")
 			.then(res => {
-				this.props.tasksAction(res.data);
+				this.props.dispatchTasks(res.data);
 				this.props.dispatchDate(getDate());
 			})
 			.catch(err => console.log(err));
@@ -51,7 +46,7 @@ class Home extends Component {
 			<Layout>
 				<Container>
 					<Period />
-					<Date />
+					<Date dateShow={this.state.dateShow} />
 					<Tasks filteredTasks={this.state.filteredTasks} />
 				</Container>
 			</Layout>
@@ -64,7 +59,7 @@ const mapStateToProps = state => state;
 const mapDispatchToProps = dispach => {
 	return bindActionCreators(
 		{
-			tasksAction,
+			dispatchTasks,
 			dispatchDate
 		},
 		dispach

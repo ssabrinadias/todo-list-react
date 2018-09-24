@@ -4,28 +4,56 @@ import style from "./style.scss";
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 // import { Button, ButtonGroup } from 'react-bootstrap';
-import {dateAction} from './action';
+import { FaArrowLeft, FaArrowRight} from 'react-icons/fa';
+import moment from "moment";
 import {methodGetDate} from './service';
 import {actionDate} from './action';
-import { FaArrowLeft, FaArrowRight} from 'react-icons/fa';
 
+const changeDate = ({selectDate, sum, typeDate}) => (
+	sum ? selectDate.add(1, `${typeDate}s`) :
+	selectDate.subtract(1, `${typeDate}s`)
+).format('D/M/YYYY')
 
 const Date = (props) => {
-	return <div className="date">
-		<button className="date__button"><FaArrowLeft/></button>
-		<span className='date__display'>19/09</span>
-		<button className="date__button"><FaArrowRight/></button>
-		<span className="date__info">2018</span>
-	</div>
+	const selectDate = moment(props.filters.date, "D/M/YYYY");
+	const typeDate = props.filters.period;
+	return (!!props.filters.date && <div className="date">
+
+		<button className="date__button"
+			onClick={()=> {
+				props.actionDate(changeDate({selectDate, typeDate,}))
+			}
+		}>
+			<FaArrowLeft/>
+		</button>
+
+		<span className='date__display'>{
+			Array.isArray(props.dateShow) ? 
+				`${moment(props.dateShow[0], "D/M/YYYY").format('D/M')} à
+				${moment(props.dateShow.pop(), "D/M/YYYY").format('D/M')}` :
+
+				typeDate === "month"? selectDate.format('MMMM') :  selectDate.format('D/M') 
+			}</span>
+
+		<button className="date__button"
+			onClick={()=> {
+				props.actionDate(changeDate({selectDate, typeDate: props.filters.period, sum:true}))
+			}
+		}>
+			<FaArrowRight/>
+		</button>
+
+		<span className="date__info">{selectDate.format('YYYY')}</span>
+	</div>)
 };
 
 const mapStateToProps = state => state;
 
 const mapDispatchToProps = (dispach) => {
-    return bindActionCreators({dateAction},dispach)
+    return bindActionCreators({actionDate},dispach)
 }
 
-// get date mathod
+// get date method
 export const getDate = methodGetDate;
 //method dispach
 export const dispatchDate = actionDate;

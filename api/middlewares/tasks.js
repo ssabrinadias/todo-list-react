@@ -21,7 +21,6 @@ async function create(req, res, next) {
 			color: "teste2"
 		})
 		.then(function(response) {
-			console.log("aqui", req.body);
 			return next();
 		})
 		.catch(function(error) {
@@ -36,7 +35,6 @@ async function edit(req, res, next) {
 			color: "teste"
 		})
 		.then(function(response) {
-			console.log(response.data);
 			return next();
 		})
 		.catch(function(error) {
@@ -48,7 +46,6 @@ async function delet(req, res, next) {
 	return await axios
 		.delete(`http://5ba1adacee710f0014dd767e.mockapi.io/tasks/${req.params.id}`)
 		.then(function(response) {
-			console.log(response.data);
 			return next();
 		})
 		.catch(function(error) {

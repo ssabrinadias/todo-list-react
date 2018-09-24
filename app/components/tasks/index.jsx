@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import style from "./style.scss";
+import {tasksAction} from "./action";
 import { ListGroup, Badge, Button } from 'react-bootstrap';
 import { FaEdit, FaTrash} from 'react-icons/fa';
 
@@ -36,4 +37,7 @@ const tasks = (props) => {
 };
 
 
+//method dispach
+export const dispatchTasks = tasksAction;
+//date component
 export default tasks

@@ -2,6 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom";
 import style from "./style.scss";
 
-export const Layout = props=>(
-    <div className='layout'>{props.children}</div>
+export default (props)=>(
+    <div className='container'>{props.children}</div>
 )

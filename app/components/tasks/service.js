@@ -5,5 +5,5 @@ import { bindActionCreators } from "redux";
 import { tasksAction } from "./action";
 
 const teste = props => {
-	return console.log(props);
+	return false;
 };
