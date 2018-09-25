@@ -10,6 +10,26 @@
         align-items: stretch;
         padding: 10px 0; 
         border-bottom: 1px solid #ccc;
+        &__fake-check {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            width: 100%;
+            font-size: 1.4em;
+            padding-top: 9px;
+            svg {
+                color: $secondary-color
+            }
+            &--done {
+                svg {
+                    color: #4fbe58;
+                }
+            }
+        }
+        &__check {
+           display: none; 
+        }
         &--done {
             text-decoration: line-through;
         }
@@ -17,12 +37,16 @@
             border: none;
         }
         &__col {
+            display: flex;
+            align-items: center;
+
             &:nth-child(1){
                 flex-basis: 35px;
             }
             
             &:nth-child(2){
                 flex: 3;
+                padding: 0 10px;
             }
             
             &:nth-child(3){
@@ -37,6 +61,7 @@
 
             &:nth-child(5){
                 flex: 1 100%;
+                padding-top: 5px; 
             }
         }
     }
@@ -63,6 +88,10 @@
             background-color: darken($primary-color, 5%) ;
             border: 1px solid  darken($primary-color, 5%);
         }
+    }
+    &__alert {
+        margin-top: 15px;
+        text-align: center;        
     }
     .badge {
         margin-right: 10px; 

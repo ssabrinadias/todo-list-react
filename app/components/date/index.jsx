@@ -3,7 +3,6 @@ import ReactDOM from "react-dom";
 import style from "./style.scss";
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
-// import { Button, ButtonGroup } from 'react-bootstrap';
 import { FaArrowLeft, FaArrowRight} from 'react-icons/fa';
 import moment from "moment";
 import {methodGetDate} from './service';

@@ -65,7 +65,6 @@ class Home extends Component {
 	}
 
 	render() {
-		console.log("filters", this.props.filters);
 		return (
 			<Layout>
 				<Container>
