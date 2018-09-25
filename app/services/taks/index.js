@@ -13,10 +13,10 @@ export function get(id) {
 
 export function edit(id, params) {
 	return axios
-		.put(
-			`http://localhost:3000/tasks${id}`,
+		.post(
+			`http://localhost:3000/tasks/edit/${id}`,
 			{
-				params
+				...params
 			},
 			{
 				headers: {

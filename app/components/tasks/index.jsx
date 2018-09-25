@@ -8,7 +8,8 @@ import { ListGroup, Badge, Button, Alert } from 'react-bootstrap';
 import { FaEdit, FaTrash, FaCheckCircle} from 'react-icons/fa';
 import {edit} from '../../services/taks';
 
-const updateTask = (value, props)=> {
+async function updateTask (value, props) {
+    await edit(value.id, {done: !value.done})
     props.tasksAction (Object.values(props.tasks)
     .map(item=> {
         if(item.id === value.id) {

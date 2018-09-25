@@ -28,12 +28,18 @@ async function create(req, res, next) {
 		});
 }
 
-async function edit(req, res, next) {
+async function edit(req, res) {
+	const params = req.body;
 	return await axios
-		.put(`http://5ba1adacee710f0014dd767e.mockapi.io/tasks/${req.params.id}`, {
-			name: "teste",
-			color: "teste"
-		})
+		.put(
+			`http://5ba1adacee710f0014dd767e.mockapi.io/tasks/${req.params.id}`,
+			params,
+			{
+				headers: {
+					"Content-Type": "application/json"
+				}
+			}
+		)
 		.then(function(response) {
 			return next();
 		})
