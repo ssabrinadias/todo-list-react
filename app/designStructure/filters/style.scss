@@ -1,0 +1,19 @@
+.filters {
+  display: flex;
+  justify-content: flex-end;
+  flex: 1 100%;
+  margin: 20px 0;
+  padding: 10px;
+  background: #396c7f;
+  border-radius: 6px;
+  color: #fff;
+}
+
+.select {
+  padding: 8px;
+  border: none;
+  border-radius: 3px;
+  margin: 0 10px;
+  font-size: 0.8em;
+  text-transform: uppercase;
+}

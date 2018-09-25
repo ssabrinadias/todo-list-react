@@ -4,10 +4,12 @@ import axios from "axios";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import App from "../views/_app";
-import { Layout, Container } from "../designStructure";
+import { Layout, Container, Filter } from "../designStructure";
 import Period, { periodFilter } from "../components/period";
 import Date, { getDate, dispatchDate } from "../components/date";
 import Tasks, { dispatchTasks } from "../components/tasks";
+import Tags, { dispatchGetTags, tagsFilter } from "../components/tags";
+import Done, { doneFilter } from "../components/done";
 
 class Home extends Component {
 	constructor(props) {
@@ -20,33 +22,59 @@ class Home extends Component {
 	}
 
 	componentDidUpdate(oldProps) {
-		if (oldProps.filters != this.props.filters) {
-			this.setState(
-				periodFilter({
-					period: this.props.filters.period,
-					tasks: this.props.tasks,
-					date: this.props.filters.date
-				})
-			);
+		let labelTag = this.props.filters.tags;
+		let labelDone = this.props.filters.done;
+
+		if (oldProps != this.props) {
+			let steps = periodFilter({
+				period: this.props.filters.period,
+				tasks: this.props.tasks,
+				date: this.props.filters.date
+			});
+
+			steps.filteredTasks = tagsFilter({
+				tasks: steps.filteredTasks,
+				label: labelTag
+			});
+
+			steps.filteredTasks = doneFilter({
+				tasks: steps.filteredTasks,
+				label: labelDone
+			});
+			this.setState({
+				filteredTasks: steps.filteredTasks,
+				dateShow: steps.dateShow
+			});
 		}
 	}
 
 	componentDidMount() {
 		axios
-			.get("http://localhost:3000/tasks")
-			.then(res => {
-				this.props.dispatchTasks(res.data);
-				this.props.dispatchDate(getDate());
-			})
+			.all([
+				axios.get("http://localhost:3000/tags"),
+				axios.get("http://localhost:3000/tasks")
+			])
+			.then(
+				axios.spread((tags, tasks) => {
+					this.props.dispatchTasks(tasks.data);
+					this.props.dispatchGetTags(tags.data);
+					this.props.dispatchDate(getDate());
+				})
+			)
 			.catch(err => console.log(err));
 	}
 
 	render() {
+		console.log("filters", this.props.filters);
 		return (
 			<Layout>
 				<Container>
 					<Period />
 					<Date dateShow={this.state.dateShow} />
+					<Filter>
+						<Tags tags={this.props.tags} />
+						<Done />
+					</Filter>
 					<Tasks filteredTasks={this.state.filteredTasks} />
 				</Container>
 			</Layout>
@@ -60,7 +88,8 @@ const mapDispatchToProps = dispach => {
 	return bindActionCreators(
 		{
 			dispatchTasks,
-			dispatchDate
+			dispatchDate,
+			dispatchGetTags
 		},
 		dispach
 	);

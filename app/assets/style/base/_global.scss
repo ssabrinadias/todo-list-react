@@ -1,3 +1,14 @@
+@import "../abstracts/variables";
+
+body {    
+    background: #5d2c54;
+}
+
+
+svg {
+    color: $secondary-color;
+}
+
 a:link,
 a:visited,
 a:hover,

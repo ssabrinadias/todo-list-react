@@ -1,3 +1,4 @@
+@import "../../assets/style/abstracts/variables";
 .date {
     display: flex;
     flex-wrap: wrap;
@@ -12,8 +13,12 @@
         }
     }
     &__display {
-        width: 100px;
+        width: 115px;
         text-align: center;
+        color: $secondary-color;
+        font-weight: bold;
+        text-transform: uppercase;
+        font-size: 0.9em;
     }
     &__info {
         flex: 1 100%;

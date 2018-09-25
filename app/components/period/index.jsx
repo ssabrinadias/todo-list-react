@@ -20,7 +20,7 @@ const Period = (props) => {
 		<Button
 			key={id}
 			value = {id}
-			className={props.filters.period === id? 'active':''}
+			className={props.filters.period === id? 'period__btn active':'' + ' period__btn'}
 			onClick={({target})=>props.periodAction(target.value)}
 		>
 			{value}
@@ -28,7 +28,7 @@ const Period = (props) => {
 	)
 
 	return <div className="period">
-		<ButtonGroup aria-label="Basic example">
+		<ButtonGroup >
 			{
 				Object.entries(periods)
 				.map(([value, id])=>(
