@@ -4,13 +4,14 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+require("babel-polyfill");
 
 const environment = process.env.NODE_ENV !== "production";
 
 module.exports = {
 	mode: environment ? "development" : "production",
 	entry: {
-		index: path.resolve("./app/views/index.js")
+		index: ["babel-polyfill", path.resolve("./app/views/index.js")]
 	},
 	output: {
 		filename: "principal.js",
