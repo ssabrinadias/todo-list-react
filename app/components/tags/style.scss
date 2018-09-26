@@ -1,0 +1,24 @@
+@import "../../assets/style/abstracts/variables";
+.button {
+    float: right;
+    background: $secondary-color;
+    border: none;
+    &:hover {
+        background: darken($secondary-color,10%);        
+    }
+    &:not(:disabled):not(.disabled) {
+        &.active {
+            background-color: darken($primary-color, 5%) ;
+            border: 1px solid  darken($primary-color, 5%);
+            &:focus{
+                box-shadow: none;
+            }
+        }
+        &:active {
+            background-color: darken($primary-color, 5%) ;
+        }
+    }
+    svg {
+        color: $primary-color
+    }
+}

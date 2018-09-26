@@ -1,8 +1,15 @@
 @import "../../assets/style/abstracts/variables";
+@import "../../assets/style/abstracts/mixins";
 
 .list {
     flex: 1 100%;
     margin-top: 20px;
+    .list-group-item {
+        padding: .75rem 1rem;
+        @include breakpoint(medium) {
+            padding: .75rem 1.25rem;
+        }        
+    }
     &__item {
         display: flex;
         justify-content: space-around;
@@ -16,7 +23,7 @@
             justify-content: center;
             height: 100%;
             width: 100%;
-            font-size: 1.4em;
+            font-size: 1em;
             padding-top: 9px;
             svg {
                 color: $secondary-color
@@ -46,11 +53,18 @@
             
             &:nth-child(2){
                 flex: 3;
-                padding: 0 10px;
+                padding: 0;
+                @include breakpoint(medium) {
+                    padding: 0 10px;
+                }
             }
             
             &:nth-child(3){
                 flex: 1;
+                display: none;
+                @include breakpoint(medium) {
+                    display: block;
+                }
             }
             
             &:nth-child(4){
@@ -61,7 +75,10 @@
 
             &:nth-child(5){
                 flex: 1 100%;
-                padding-top: 5px; 
+                padding-top: 12px; 
+                @include breakpoint(medium) {
+                    padding-top: 7px; 
+                }
             }
         }
     }

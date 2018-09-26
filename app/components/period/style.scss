@@ -1,7 +1,14 @@
 @import "../../assets/style/abstracts/variables";
+@import "../../assets/style/abstracts/mixins";
+
 .period {
     display: flex;
-    flex: 1;
+    justify-content: center;
+    flex: 1 100%;
+    @include breakpoint(medium) {
+        flex: 1;
+        justify-content: flex-start;
+    }
     &__btn{
         background: $primary-color;
         border: 1px solid  darken($primary-color, 5%);

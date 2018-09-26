@@ -1,7 +1,16 @@
 @import "../../assets/style/abstracts/variables";
+@import "../../assets/style/abstracts/mixins";
+
 .date {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
+    flex: 1 100%;
+    margin-top: 20px;
+    @include breakpoint(medium) {
+        margin-top: 0;
+        flex: inherit
+    }
     &__button {
         flex: 1;
         border: none;

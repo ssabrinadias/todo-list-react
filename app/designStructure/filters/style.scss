@@ -1,19 +1,26 @@
+@import "../../assets/style/abstracts/mixins";
 .filters {
-  display: flex;
-  justify-content: flex-end;
   flex: 1 100%;
   margin: 20px 0;
-  padding: 10px;
+  padding: 10px 8px;
   background: #396c7f;
   border-radius: 6px;
   color: #fff;
+  @include breakpoint(medium) {
+    padding: 10px;
+  }
 }
 
 .select {
-  padding: 8px;
+  padding: 8px 2px;
   border: none;
   border-radius: 3px;
-  margin: 0 10px;
+  margin: 0 3px;
   font-size: 0.8em;
   text-transform: uppercase;
+  
+  @include breakpoint(medium) {
+    padding: 8px;
+    margin: 0 10px;
+  }
 }

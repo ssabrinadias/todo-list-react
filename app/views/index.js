@@ -82,8 +82,8 @@ class Home extends Component {
 				<Container>
 					<Period />
 					<Date dateShow={this.state.dateShow} />
-					<NewTaskButton newTask={modalNewTaskOpen} />
 					<Filter>
+						<NewTaskButton newTask={modalNewTaskOpen} />
 						<Tags tags={this.props.tags} />
 						<Done />
 					</Filter>

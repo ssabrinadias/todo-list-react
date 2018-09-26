@@ -28,9 +28,10 @@ class NewTask extends React.Component {
 	}
 
 	taskEdit(id) {
-		if(id==="new"){
-			this.setState({
-				id: 'new',
+		console.log(id)
+		if(id===null){
+			return this.setState({
+				id: null,
 				title: '',
 				description: '',
 				duration: '',
@@ -63,7 +64,7 @@ class NewTask extends React.Component {
 	componentDidUpdate() {
 		let id = this.props.idTask;
 		
-		if(id && this.state.id !== id) {
+		if(this.state.id !== id) {
 			this.taskEdit(id)
 		} 
 	}
