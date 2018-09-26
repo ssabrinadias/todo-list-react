@@ -26,8 +26,6 @@ const mapDispatchToProps = (dispach) => {
 }
 
 
-//get method tags dispatch 
-export const dispatchDone = doneAction;
 //method filter
 export const doneFilter = methodDonedFilter;
 //date component

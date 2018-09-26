@@ -37,8 +37,12 @@ const tasks = (props) => {
                             <li className='list__item__col'>{value.title}</li>
                             <li className='list__item__col'>{value.date}</li>
                             <li className='list__item__col'>
-                                <Button variant="primary" className="list__btn"><FaEdit/></Button>
-                                <Button variant="primary" className="list__btn"><FaTrash/></Button>
+                                <Button variant="primary" className="list__btn" onClick={()=>props.newTask(value.id)}>
+                                    <FaEdit/>
+                                </Button>
+                                <Button variant="primary" className="list__btn">
+                                    <FaTrash/>
+                                </Button>
                             </li>
                             <li className='list__item__col'>
                                 <Badge variant="info">Estudos</Badge>

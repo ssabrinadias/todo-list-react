@@ -10,6 +10,7 @@ import Date, { getDate, dispatchDate } from "../components/date";
 import Tasks, { dispatchTasks } from "../components/tasks";
 import Tags, { dispatchGetTags, tagsFilter } from "../components/tags";
 import Done, { doneFilter } from "../components/done";
+import NewTask, { NewTaskButton } from "../components/newTask";
 
 class Home extends Component {
 	constructor(props) {
@@ -17,7 +18,8 @@ class Home extends Component {
 
 		this.state = {
 			filteredTasks: null,
-			dateShow: null
+			dateShow: null,
+			modalNewTask: false
 		};
 	}
 
@@ -65,16 +67,35 @@ class Home extends Component {
 	}
 
 	render() {
+		let modalNewTaskClose = () =>
+			this.setState({
+				modalNewTask: false,
+				editTask: null
+			});
+		let modalNewTaskOpen = id =>
+			this.setState({
+				modalNewTask: true,
+				editTask: id
+			});
 		return (
 			<Layout>
 				<Container>
 					<Period />
 					<Date dateShow={this.state.dateShow} />
+					<NewTaskButton newTask={modalNewTaskOpen} />
 					<Filter>
 						<Tags tags={this.props.tags} />
 						<Done />
 					</Filter>
-					<Tasks filteredTasks={this.state.filteredTasks} />
+					<Tasks
+						filteredTasks={this.state.filteredTasks}
+						newTask={modalNewTaskOpen}
+					/>
+					<NewTask
+						show={this.state.modalNewTask}
+						onHide={modalNewTaskClose}
+						idTask={this.state.editTask}
+					/>
 				</Container>
 			</Layout>
 		);

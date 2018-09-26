@@ -41,7 +41,7 @@ async function edit(req, res) {
 			}
 		)
 		.then(function(response) {
-			return response.data;
+			return res.json(response.data);
 		})
 		.catch(function(error) {
 			return error;
