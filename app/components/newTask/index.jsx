@@ -21,7 +21,7 @@ class NewTask extends React.Component {
 				duration: '',
 				hour: '',
 				date: '',
-				tags: ''
+				tags: 'all'
 			}
 		};
 	}
@@ -122,7 +122,7 @@ class NewTask extends React.Component {
 			aria-labelledby="contained-modal"
 			centered
 		>
-			<Modal.Header closeButton>
+			<Modal.Header closeButton>	
 				<Modal.Title id="contained-modal">
 					Nova Tarefa
 				</Modal.Title>
@@ -194,23 +194,36 @@ class NewTask extends React.Component {
 						</Row>
 					</Form.Group>
 							
-					{/* <Form.Group as={Row} controlId="formPlaintextPassword">
+					<Form.Group as={Row} controlId="formPlaintextPassword">
 						<Form.Label column sm="5">
 							Selecione uma Tag:
 						</Form.Label>
 						<Col sm="7">
 							<Form.Control 
 								as="select"
-								onChange={this.onChange}		
-								name="tag"		
+								value={this.state.tags}
+								onChange = {(e)=>(this.onChange(e))}	
+								name="tags"		
 							>
+								<option
+									value="all"
+								>
+									Escolha uma Tag:
+								</option>
 							{
 								Object.values(this.props.tags)
-								.map(value=><option value={value.id}>{value.name}</option>)
+								.map(value=>
+									<option
+										value={value.id}
+										key={value.id}
+									>
+										{value.name}
+									</option>
+								)
 							}
 							</Form.Control>
 						</Col>
-					</Form.Group> */}
+					</Form.Group>
 
 					<Button type="submit">Submit</Button>
 				</Form>

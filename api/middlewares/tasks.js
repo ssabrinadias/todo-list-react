@@ -50,7 +50,6 @@ async function edit(req, res) {
 }
 
 async function delet(req, res, next) {
-	console.log("back");
 	return await axios
 		.delete(`http://5ba1adacee710f0014dd767e.mockapi.io/tasks/${req.params.id}`)
 		.then(function(response) {

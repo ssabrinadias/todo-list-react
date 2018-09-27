@@ -31,7 +31,8 @@ const  deleteTask = async (id, props)=> {
 }
 
 const tasks = (props) => {
-    let tasks = Object.entries(props.filteredTasks || []);
+    const tag = Object.values(props.tags).filter((item)=>item.id === "1").pop();
+    const tasks = Object.entries(props.filteredTasks || []);
     return (    
         <ListGroup className="list">
             <ListGroup.Item>
@@ -47,7 +48,9 @@ const tasks = (props) => {
                             <li className='list__item__col'>{moment(value.date, "YYYY-MM-DD").format("DD/MM/YYYY")}</li>
                             <li className='list__item__col'>{value.hour}</li>
                             <li className='list__item__col'>
-                                <Badge variant="info">{(props.tags[value.tags]|| {}).name }</Badge>
+                                <Badge variant="info">
+                                    {tag.name}
+                                    </Badge>
                             </li>
                             <li className='list__item__col'>
                                 <Button variant="primary" className="list__btn" onClick={()=>props.newTask(value.id)}>
