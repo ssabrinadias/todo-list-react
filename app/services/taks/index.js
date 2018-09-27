@@ -13,7 +13,22 @@ export function get(id) {
 export async function edit(id, params) {
 	return await axios
 		.post(
-			`http://localhost:3000/tasks/edit/${id}`,
+			`http://localhost:3000/tasks/edit/${id || ""}`,
+			{ ...params },
+			{ headers: { "Content-Type": "application/json" } }
+		)
+		.then(function(response) {
+			return res.json(response.data);
+		})
+		.catch(function(error) {
+			return error;
+		});
+}
+
+export async function create(id, params) {
+	return await axios
+		.post(
+			`http://localhost:3000/tasks/create`,
 			{ ...params },
 			{ headers: { "Content-Type": "application/json" } }
 		)

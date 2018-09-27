@@ -28,6 +28,7 @@ class Home extends Component {
 		let labelDone = this.props.filters.done;
 
 		if (oldProps != this.props) {
+			this.forceUpdate();
 			let steps = periodFilter({
 				period: this.props.filters.period,
 				tasks: this.props.tasks,
@@ -67,6 +68,7 @@ class Home extends Component {
 	}
 
 	render() {
+		console.log(this.props.tasks);
 		let modalNewTaskClose = () =>
 			this.setState({
 				modalNewTask: false,

@@ -53,38 +53,43 @@
             
             &:nth-child(2){
                 flex: 3;
-                padding: 0;
-                @include breakpoint(medium) {
-                    padding: 0 10px;
-                }
             }
             
             &:nth-child(3){
                 flex: 1;
-                display: none;
-                @include breakpoint(medium) {
-                    display: block;
-                }
             }
             
             &:nth-child(4){
                 flex-basis: 100px;
-                display: flex;
-                justify-content: space-around;
+                display: none;
+                @include breakpoint(medium) {
+                    display: flex;
+                }
             }
 
             &:nth-child(5){
-                flex: 1 100%;
-                padding-top: 12px; 
+                flex-basis: 100px;
+                display: none;
                 @include breakpoint(medium) {
-                    padding-top: 7px; 
+                    display: flex;
                 }
+            }
+
+            &:nth-child(6){
+                flex-basis: 40px;
+                padding-left: 5px;                
+                justify-content: space-around;
+                @include breakpoint(medium) {
+                    display: flex;
+                }
+                
             }
         }
     }
     &__btn{
         background: $primary-color;
         border: 1px solid  darken($primary-color, 5%);
+        margin-left: 8px;
         &:hover {
             background: darken($primary-color, 5%);
             border: 1px solid  darken($primary-color, 8%);

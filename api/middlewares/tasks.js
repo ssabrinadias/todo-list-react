@@ -13,15 +13,16 @@ async function get(req, res, next) {
 		});
 }
 
-async function create(req, res, next) {
+async function create(req, res) {
+	const params = req.body;
 	return await axios
-		.post(`http://5ba1adacee710f0014dd767e.mockapi.io/tasks/`, {
-			createdAt: "15/12/2016",
-			name: "teste",
-			color: "teste2"
+		.post(`http://5ba1adacee710f0014dd767e.mockapi.io/tasks/`, params, {
+			headers: {
+				"Content-Type": "application/json"
+			}
 		})
 		.then(function(response) {
-			return next();
+			return res.json(response.data);
 		})
 		.catch(function(error) {
 			return error;

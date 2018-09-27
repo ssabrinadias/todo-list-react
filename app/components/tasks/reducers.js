@@ -1,7 +1,8 @@
+import moment from "moment";
 const INITIAL_STATE = {};
 
 export default (state = INITIAL_STATE, action) => {
-	// console.log('aqui', state)
+	let countTask = Object.keys(state).length;
 	switch (action.type) {
 		case "CHANGE_TASKS":
 			return {
@@ -11,7 +12,11 @@ export default (state = INITIAL_STATE, action) => {
 		case "UPDATE_TASKS":
 			return {
 				...state,
-				...action.value
+				[countTask]: {
+					...action.value,
+					createdAt: moment().format("D/M/YYYY"),
+					id: (countTask + 1).toString()
+				}
 			};
 		default:
 			return state;

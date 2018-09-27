@@ -3,8 +3,8 @@ import ReactDOM from "react-dom";
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import { Modal, Button, Form, Row, Col} from 'react-bootstrap';
-import {edit} from '../../services/taks'
-import {tasksAction} from "../tasks/action";
+import {edit, create} from '../../services/taks'
+import {tasksAction, tasksUpdateAction} from "../tasks/action";
 import {newTaskButton} from "./button";
 // import style from "./style.scss";
 
@@ -14,30 +14,38 @@ class NewTask extends React.Component {
 		
 		this.state = {
 			id: '',
-			title: '',
-			description: '',
-			duration: '',
-			hour: '',
-			date: '',
-			tags: []
-		};
-	}
-
-	onChange (e){
-		return this.setState({ [e.target.name]: e.target.value });
-	}
-
-	taskEdit(id) {
-		console.log(id)
-		if(id===null){
-			return this.setState({
-				id: null,
+			data : {
 				title: '',
 				description: '',
 				duration: '',
 				hour: '',
 				date: '',
-				tags: []
+				tags: ''
+			}
+		};
+	}
+
+	onChange (e){
+		return this.setState({ 
+			data: {
+				...this.state.data,
+				[e.target.name]: e.target.value
+			}
+		});
+	}
+
+	taskEdit(id) {
+		if(id===null){
+			return this.setState({
+				id: null,
+				data: {
+					title: '',
+					description: '',
+					duration: '',
+					hour: '',
+					date: '',
+					tags: ''
+				}
 			});
 		}
 		Object.values(this.props.tasks)
@@ -52,12 +60,14 @@ class NewTask extends React.Component {
 			tags
 		})=>this.setState({			
 			id,
-			title,
-			description,
-			duration: duration+"",
-			hour,
-			date,
-			tags
+			data: {
+				title,
+				description,
+				duration: duration+"",
+				hour,
+				date,
+				tags
+			}
 		}))
 	}
 
@@ -71,26 +81,40 @@ class NewTask extends React.Component {
 
 	async onSubmit (e)	 {
 		e.preventDefault();
-		let ready = await edit(this.state.id, this.state)
+
+		const id = this.state.id;
+		const service = id? edit : create;
+		const ready = await service(id, this.state.data)
+
+		let compileTask = {};
+
 		if(ready){
-			this.props.tasksAction(Object.values(this.props.tasks)
-				.map((item) => {
-					if(item.id === this.state.id){
-						item = {
-							...item,
-							...this.state
+			
+			if(id) {
+				this.props.tasksAction( Object.values(this.props.tasks)
+					.map((item) => {
+						if(item.id === id){
+							item = {
+								...item,
+								...this.state.data
+							}
 						}
-					}
-					return item
-				})
-			)
+						return item
+					})
+				)
+			} else {
+				console.log('aqui')
+				console.log(this.state)
+				this.props.tasksUpdateAction(this.state.data)
+			}
+			
 			this.props.onHide()
 		}
 	}
 	
     render() {
 	const { onHide, show } = this.props;
-	const { description, title, tags, hour, date, duration} = this.state;
+	const { description, title, tags, hour, date, duration} = this.state.data;
 	return (
 		<Modal
 			onHide = {onHide}
@@ -198,7 +222,7 @@ class NewTask extends React.Component {
 const mapStateToProps = state => state;
 
 const mapDispatchToProps = (dispach) => {
-    return bindActionCreators({tasksAction},dispach)
+    return bindActionCreators({tasksAction, tasksUpdateAction},dispach)
 }
 
 export const NewTaskButton = newTaskButton;

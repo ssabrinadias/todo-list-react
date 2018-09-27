@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';    
 import {tasksAction} from "./action";
 import { ListGroup, Badge, Button, Alert } from 'react-bootstrap';
-import { FaEdit, FaTrash, FaCheckCircle, FaCheck} from 'react-icons/fa';
+import { FaEdit, FaTrash, FaCheckCircle, FaCheck, FaCheckSquare} from 'react-icons/fa';
 import {edit} from '../../services/taks';
 
 const  updateTask = async (value, props)=> {
@@ -31,11 +31,15 @@ const tasks = (props) => {
                         
                         return <ul className={`list__item ${value.done ? "list__item--done" : ""}`} key={id}>
                             <li className='list__item__col'>
-                                <label  className={`list__item__fake-check ${value.done ? "list__item__fake-check--done" : ""}`} htmlFor={id}><FaCheck/></label>
+                                <label  className={`list__item__fake-check ${value.done ? "list__item__fake-check--done" : ""}`} htmlFor={id}><FaCheckSquare/></label>
                                 <input className="list__item__check" type='checkbox' checked={value.done} onChange={(e)=>updateTask(value, props)} id={id} />
                             </li>
                             <li className='list__item__col'>{value.title}</li>
                             <li className='list__item__col'>{value.date}</li>
+                            <li className='list__item__col'>{value.hour}</li>
+                            <li className='list__item__col'>
+                                <Badge variant="info">{(props.tags[value.tags]|| {}).name }</Badge>
+                            </li>
                             <li className='list__item__col'>
                                 <Button variant="primary" className="list__btn" onClick={()=>props.newTask(value.id)}>
                                     <FaEdit/>
@@ -43,10 +47,6 @@ const tasks = (props) => {
                                 <Button variant="primary" className="list__btn">
                                     <FaTrash/>
                                 </Button>
-                            </li>
-                            <li className='list__item__col'>
-                                <Badge variant="info">Estudos</Badge>
-                                <Badge variant="danger">Faculdade</Badge>
                             </li>
                         </ul>
                     }) :
