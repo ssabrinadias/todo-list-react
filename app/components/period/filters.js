@@ -1,33 +1,33 @@
 import moment from "moment";
 
 const week = date => {
-	let day = moment(date, "D/M/YYYY").format("D");
-	let dayOfWeek = moment(date, "D/M/YYYY").weekday();
+	let day = moment(date, "DD/MM/YYYY").format("D");
+	let dayOfWeek = moment(date, "DD/MM/YYYY").weekday();
 	const initialDate = [
-		moment(date, "D/M/YYYY")
+		moment(date, "DD/MM/YYYY")
 			.subtract(dayOfWeek, "days")
-			.format("D/M/YYYY")
+			.format("DD/MM/YYYY")
 	];
 
 	for (var i = 1; i < 7; i++) {
 		initialDate.push(
-			moment(initialDate[0], "D/M/YYYY")
+			moment(initialDate[0], "DD/MM/YYYY")
 				.add(i, "days")
-				.format("D/M/YYYY")
+				.format("DD/MM/YYYY")
 		);
 	}
 	return initialDate;
 };
 
 const periodType = ({ dateItem, period, dates }) => {
+	dateItem = moment(dateItem, "YYYY-MM-DD").format("DD/MM/YYYY");
 	switch (period) {
 		case "week":
 			return dates.indexOf(dateItem) != -1;
 		case "month":
-			// const month = moment(date, "D/M/YYYY").format("M");
 			return (
-				moment(dateItem, "D/M/YYYY").format("M") ===
-				moment(dates, "D/M/YYYY").format("M")
+				moment(dateItem, "DD/MM/YYYY").format("M") ===
+				moment(dates, "DD/MM/YYYY").format("M")
 			);
 		case "day":
 			return dateItem == dates;

@@ -1,3 +1,3 @@
 import moment from "moment";
 
-export const methodGetDate = () => moment().format("D/M/YYYY");
+export const methodGetDate = () => moment().format("DD/MM/YYYY");

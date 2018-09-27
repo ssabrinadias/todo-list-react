@@ -3,10 +3,11 @@ import ReactDOM from "react-dom";
 import style from "./style.scss";
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';    
-import {tasksAction} from "./action";
+import {tasksAction, tasksDeleteAction} from "./action";
 import { ListGroup, Badge, Button, Alert } from 'react-bootstrap';
 import { FaEdit, FaTrash, FaCheckCircle, FaCheck, FaCheckSquare} from 'react-icons/fa';
-import {edit} from '../../services/taks';
+import {edit, delet} from '../../services/taks';
+import moment from 'moment';
 
 const  updateTask = async (value, props)=> {
     var res = await edit(value.id, {done: !value.done})
@@ -18,6 +19,14 @@ const  updateTask = async (value, props)=> {
             }
             return item
         })) 
+    }    
+}
+
+const  deleteTask = async (id, props)=> {
+    var ready = await delet(id)
+    if(ready) {
+        
+        props.tasksDeleteAction(id)
     }    
 }
 
@@ -35,7 +44,7 @@ const tasks = (props) => {
                                 <input className="list__item__check" type='checkbox' checked={value.done} onChange={(e)=>updateTask(value, props)} id={id} />
                             </li>
                             <li className='list__item__col'>{value.title}</li>
-                            <li className='list__item__col'>{value.date}</li>
+                            <li className='list__item__col'>{moment(value.date, "YYYY-MM-DD").format("DD/MM/YYYY")}</li>
                             <li className='list__item__col'>{value.hour}</li>
                             <li className='list__item__col'>
                                 <Badge variant="info">{(props.tags[value.tags]|| {}).name }</Badge>
@@ -44,7 +53,7 @@ const tasks = (props) => {
                                 <Button variant="primary" className="list__btn" onClick={()=>props.newTask(value.id)}>
                                     <FaEdit/>
                                 </Button>
-                                <Button variant="primary" className="list__btn">
+                                <Button variant="primary" className="list__btn" onClick={(e)=>deleteTask(value.id, props)}>
                                     <FaTrash/>
                                 </Button>
                             </li>
@@ -62,7 +71,7 @@ const tasks = (props) => {
 const mapStateToProps = state => state;
 
 const mapDispatchToProps = (dispach) => {
-    return bindActionCreators({tasksAction},dispach)
+    return bindActionCreators({tasksAction, tasksDeleteAction},dispach)
 }
 
 

@@ -11,10 +11,10 @@ import {actionDate} from './action';
 const changeDate = ({selectDate, sum, typeDate}) => (
 	sum ? selectDate.add(1, `${typeDate}s`) :
 	selectDate.subtract(1, `${typeDate}s`)
-).format('D/M/YYYY')
+).format('DD/MM/YYYY')
 
 const Date = (props) => {
-	const selectDate = moment(props.filters.date, "D/M/YYYY");
+	const selectDate = moment(props.filters.date, "DD/MM/YYYY");
 	const typeDate = props.filters.period;
 	return (!!props.filters.date && <div className="date">
 
@@ -28,10 +28,10 @@ const Date = (props) => {
 
 		<span className='date__display'>{
 			Array.isArray(props.dateShow) ? 
-				`${moment(props.dateShow[0], "D/M/YYYY").format('D/M')} à
-				${moment(props.dateShow.pop(), "D/M/YYYY").format('D/M')}` :
+				`${moment(props.dateShow[0], "DD/MM/YYYY").format('DD/MM')} à
+				${moment(props.dateShow.pop(), "DD/MM/YYYY").format('DD/MM')}` :
 
-				typeDate === "month"? selectDate.format('MMMM') :  selectDate.format('D/M') 
+				typeDate === "month"? selectDate.format('MMMM') :  selectDate.format('DD/MM') 
 			}</span>
 
 		<button className="date__button"

@@ -14,10 +14,12 @@ export default (state = INITIAL_STATE, action) => {
 				...state,
 				[countTask]: {
 					...action.value,
-					createdAt: moment().format("D/M/YYYY"),
+					createdAt: moment().format("DD/MM/YYYY"),
 					id: (countTask + 1).toString()
 				}
 			};
+		case "DELETE_TASKS":
+			return Object.values(state).filter(({ id }) => id !== action.value);
 		default:
 			return state;
 	}

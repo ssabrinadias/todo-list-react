@@ -39,3 +39,14 @@ export async function create(id, params) {
 			return error;
 		});
 }
+
+export async function delet(id) {
+	return await axios
+		.post(`http://localhost:3000/tasks/delete/${id || ""}`)
+		.then(function(response) {
+			return res.json(response.data);
+		})
+		.catch(function(error) {
+			return error;
+		});
+}

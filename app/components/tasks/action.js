@@ -11,3 +11,10 @@ export const tasksUpdateAction = value => {
 		value
 	};
 };
+
+export const tasksDeleteAction = value => {
+	return {
+		type: "DELETE_TASKS",
+		value
+	};
+};

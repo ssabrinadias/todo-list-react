@@ -6,6 +6,7 @@ import { Modal, Button, Form, Row, Col} from 'react-bootstrap';
 import {edit, create} from '../../services/taks'
 import {tasksAction, tasksUpdateAction} from "../tasks/action";
 import {newTaskButton} from "./button";
+import moment from "moment"
 // import style from "./style.scss";
 
 class NewTask extends React.Component {
@@ -103,8 +104,6 @@ class NewTask extends React.Component {
 					})
 				)
 			} else {
-				console.log('aqui')
-				console.log(this.state)
 				this.props.tasksUpdateAction(this.state.data)
 			}
 			
@@ -139,6 +138,7 @@ class NewTask extends React.Component {
 							name="title"				
 							onChange={(e)=>(this.onChange(e))}
 							value = {title}
+							required
 						/>
 					</Form.Group>
 
@@ -158,17 +158,18 @@ class NewTask extends React.Component {
 							<Col>
 								<Form.Label>Data</Form.Label>
 								<Form.Control
-									type="text"	
+									type="date"	
 									onChange={this.onChange}			
 									name="date"				
 									onChange={(e)=>(this.onChange(e))}
 									value = {date}
+									required
 								/>
 							</Col>
 							<Col>
 								<Form.Label>Hora</Form.Label>
 								<Form.Control
-									type="text"	
+									type="time"	
 									onChange={this.onChange}			
 									name="hour"				
 									onChange={(e)=>(this.onChange(e))}
@@ -193,22 +194,23 @@ class NewTask extends React.Component {
 						</Row>
 					</Form.Group>
 							
-					<Form.Group as={Row} controlId="formPlaintextPassword">
+					{/* <Form.Group as={Row} controlId="formPlaintextPassword">
 						<Form.Label column sm="5">
 							Selecione uma Tag:
 						</Form.Label>
 						<Col sm="7">
 							<Form.Control 
 								as="select"
+								onChange={this.onChange}		
+								name="tag"		
 							>
-								<option>1</option>
-								<option>2</option>
-								<option>3</option>
-								<option>4</option>
-								<option>5</option>
+							{
+								Object.values(this.props.tags)
+								.map(value=><option value={value.id}>{value.name}</option>)
+							}
 							</Form.Control>
 						</Col>
-					</Form.Group>
+					</Form.Group> */}
 
 					<Button type="submit">Submit</Button>
 				</Form>
