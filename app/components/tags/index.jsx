@@ -6,13 +6,14 @@ import style from "./style.scss";
 import {tagsAction, getTagsAction} from "./action";
 import {methodTagsdFilter} from "./filters";
 import {Select} from "../../designStructure";
-
+    
 
 
 const tags = (props) => {
     return ( 
-            !!props.tags && <Select change={(e)=>props.tagsAction(e.target.value)}>
-                <option value={'all'}>Todas as tag</option>
+            !!props.tags && 
+            <Select value="all" change={(e)=>props.tagsAction(e.target.value)}>
+                <option value="all">Todas as tag</option>
                 {
                     Object.entries(props.tags)
                     .map(([key, value])=>(

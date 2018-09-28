@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import style from "./style.scss";
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';    
-import {tasksAction, tasksDeleteAction} from "./action";
+import {tasksAction} from "./action";
 import { ListGroup, Badge, Button, Alert } from 'react-bootstrap';
 import { FaEdit, FaTrash, FaCheckCircle, FaCheck, FaCheckSquare} from 'react-icons/fa';
 import {edit, delet} from '../../services/taks';
@@ -22,16 +22,13 @@ const  updateTask = async (value, props)=> {
     }    
 }
 
-const  deleteTask = async (id, props)=> {
-    var ready = await delet(id)
-    if(ready) {
-        
-        props.tasksDeleteAction(id)
-    }    
+
+const getTag = (id, props)=>{
+    return Object.values(props.tags).filter((item)=>item.id === id);
 }
 
 const tasks = (props) => {
-    const tag = Object.values(props.tags).filter((item)=>item.id === "1").pop();
+    
     const tasks = Object.entries(props.filteredTasks || []);
     return (    
         <ListGroup className="list">
@@ -49,15 +46,12 @@ const tasks = (props) => {
                             <li className='list__item__col'>{value.hour}</li>
                             <li className='list__item__col'>
                                 <Badge variant="info">
-                                    {tag.name}
-                                    </Badge>
+                                    {(getTag(value.tags, props).pop()|| {}).name}
+                                </Badge>
                             </li>
                             <li className='list__item__col'>
                                 <Button variant="primary" className="list__btn" onClick={()=>props.newTask(value.id)}>
                                     <FaEdit/>
-                                </Button>
-                                <Button variant="primary" className="list__btn" onClick={(e)=>deleteTask(value.id, props)}>
-                                    <FaTrash/>
                                 </Button>
                             </li>
                         </ul>
@@ -74,7 +68,7 @@ const tasks = (props) => {
 const mapStateToProps = state => state;
 
 const mapDispatchToProps = (dispach) => {
-    return bindActionCreators({tasksAction, tasksDeleteAction},dispach)
+    return bindActionCreators({tasksAction},dispach)
 }
 
 

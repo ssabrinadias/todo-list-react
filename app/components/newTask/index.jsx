@@ -2,12 +2,12 @@ import React from "react";
 import ReactDOM from "react-dom";
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
-import { Modal, Button, Form, Row, Col} from 'react-bootstrap';
-import {edit, create} from '../../services/taks'
-import {tasksAction, tasksUpdateAction} from "../tasks/action";
-import {newTaskButton} from "./button";
 import moment from "moment"
-// import style from "./style.scss";
+import { Modal, Button, Form, Row, Col} from 'react-bootstrap';
+import {edit, create, delet} from '../../services/taks'
+import {tasksAction, tasksUpdateAction, tasksDeleteAction} from "../tasks/action";
+import {FaTrash} from 'react-icons/fa';
+import {newTaskButton} from "./button";
 
 class NewTask extends React.Component {
 	constructor(props) {
@@ -72,6 +72,16 @@ class NewTask extends React.Component {
 		}))
 	}
 
+	async deleteTask(id) {
+		var ready = await delet(id)
+		if(ready) {			
+			this.props.tasksDeleteAction(id)
+			this.props.onHide()
+		}    
+	}
+	
+	
+
 	componentDidUpdate() {
 		let id = this.props.idTask;
 		
@@ -79,7 +89,7 @@ class NewTask extends React.Component {
 			this.taskEdit(id)
 		} 
 	}
-
+	
 	async onSubmit (e)	 {
 		e.preventDefault();
 
@@ -112,6 +122,7 @@ class NewTask extends React.Component {
 	}
 	
     render() {
+
 	const { onHide, show } = this.props;
 	const { description, title, tags, hour, date, duration} = this.state.data;
 	return (
@@ -129,10 +140,13 @@ class NewTask extends React.Component {
 			</Modal.Header>
 
 			<Modal.Body>
-				<Form onSubmit={(e)=>this.onSubmit(e)}>
+				<Form onSubmit={(e)=>this.onSubmit(e)} className="form-task">
 
 					<Form.Group>
 						<Form.Label>Título</Form.Label>
+						<Button variant="primary" className="form-task__btn form-task__btn--delete" onClick={(e)=>this.deleteTask(this.state.id)}>
+							<FaTrash/>
+						</Button>
 						<Form.Control
 							type="text"			
 							name="title"				
@@ -140,6 +154,7 @@ class NewTask extends React.Component {
 							value = {title}
 							required
 						/>
+
 					</Form.Group>
 
 					<Form.Group>
@@ -163,6 +178,7 @@ class NewTask extends React.Component {
 									name="date"				
 									onChange={(e)=>(this.onChange(e))}
 									value = {date}
+									pattern = "(0[1-9]|1[0-9]|2[0-9]|3[01]).(0[1-9]|1[012]).[0-9]{4}"
 									required
 								/>
 							</Col>
@@ -194,7 +210,7 @@ class NewTask extends React.Component {
 						</Row>
 					</Form.Group>
 							
-					<Form.Group as={Row} controlId="formPlaintextPassword">
+					<Form.Group as={Row}>
 						<Form.Label column sm="5">
 							Selecione uma Tag:
 						</Form.Label>
@@ -224,8 +240,7 @@ class NewTask extends React.Component {
 							</Form.Control>
 						</Col>
 					</Form.Group>
-
-					<Button type="submit">Submit</Button>
+					<Button type="submit" className="form-task__btn">Enviar</Button>
 				</Form>
 			</Modal.Body>
         </Modal>
@@ -237,7 +252,7 @@ class NewTask extends React.Component {
 const mapStateToProps = state => state;
 
 const mapDispatchToProps = (dispach) => {
-    return bindActionCreators({tasksAction, tasksUpdateAction},dispach)
+    return bindActionCreators({tasksAction, tasksUpdateAction, tasksDeleteAction},dispach)
 }
 
 export const NewTaskButton = newTaskButton;

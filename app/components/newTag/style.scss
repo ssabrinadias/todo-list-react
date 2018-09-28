@@ -1,0 +1,49 @@
+@import "../../assets/style/abstracts/variables";
+@import "../../assets/style/abstracts/supports";
+@import "../../assets/style/abstracts/mixins";
+
+.new-tags {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+    padding: 10px;
+    background: $secondary-color;
+    .form-control {
+        margin-right: 10px;
+    }
+    .btn {
+        @extend %resetBtn;
+    }
+    &__badge {
+        padding: 8px;
+        margin: 5px;
+        cursor: pointer;
+        &__description {
+            margin-right: 5px;
+        }
+        svg{
+            position: relative;
+            top: 2px;
+        }
+    }
+    &__box {
+        flex: 1 100%;
+        margin-top: 10px;
+    }
+}
+
+.button {
+    display: flex;
+    margin: 0 5px;
+    &__description {
+        color: $primary-color;
+        font-weight: bold;
+        text-transform: uppercase;
+        font-size: 0.8em;
+        margin-right: 5px;
+    }
+    svg {
+        position: relative;
+        top: 2px;
+    }
+}

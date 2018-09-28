@@ -11,3 +11,17 @@ export const tagsAction = value => {
 		value
 	};
 };
+
+export const tagsUpdateAction = value => {
+	return {
+		type: "UPDATE_TAGS",
+		value
+	};
+};
+
+export const tagsDeleteAction = value => {
+	return {
+		type: "DELETE_TAGS",
+		value
+	};
+};

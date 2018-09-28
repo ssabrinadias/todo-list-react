@@ -1,0 +1,33 @@
+@import "../../assets/style/abstracts/variables";
+@import "../../assets/style/abstracts/supports";
+@import "../../assets/style/abstracts/mixins";
+
+.form-task {
+    &__btn{
+        @extend %resetBtn;
+        float: right;
+        &--delete {
+            margin-bottom: 10px;
+        }
+    }
+}
+
+.button {
+    margin: 0 5px;
+    &__description {
+        display: none;
+        color: $primary-color;
+        font-weight: bold;
+        text-transform: uppercase;
+        font-size: 0.8em;
+        margin-right: 5px;
+                   
+        @include breakpoint(medium) {
+            display: block;
+        }
+    }
+    svg {
+        position: relative;
+        top: 2px;
+    }
+}

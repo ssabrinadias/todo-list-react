@@ -1,4 +1,5 @@
 @import "../../assets/style/abstracts/variables";
+@import "../../assets/style/abstracts/supports";
 @import "../../assets/style/abstracts/mixins";
 
 .list {
@@ -46,6 +47,10 @@
         &__col {
             display: flex;
             align-items: center;
+            font-size: 0.9em;
+            @include breakpoint(medium) {
+                font-size: 1em;
+            }
 
             &:nth-child(1){
                 flex-basis: 35px;
@@ -53,10 +58,18 @@
             
             &:nth-child(2){
                 flex: 2;
+                max-width: 120px;
+                @include breakpoint(medium) {
+                    max-width: inherit;
+                }
             }
             
             &:nth-child(3){
                 flex: 1;
+                justify-content: center;
+                @include breakpoint(medium) {
+                    justify-content: start;
+                }
             }
             
             &:nth-child(4){
@@ -90,26 +103,8 @@
         background: $primary-color;
         border: 1px solid  darken($primary-color, 5%);
         margin-left: 8px;
-        &:hover {
-            background: darken($primary-color, 5%);
-            border: 1px solid  darken($primary-color, 8%);
-        }
-        &:not(:disabled):not(.disabled) {
-            &.active {
-                background-color: darken($primary-color, 5%) ;
-                border: 1px solid  darken($primary-color, 5%);
-                &:focus{
-                    box-shadow: none;
-                }
-            }
-            &:active {
-                background-color: darken($primary-color, 5%) ;
-            }
-        }
-        &.active {
-            background-color: darken($primary-color, 5%) ;
-            border: 1px solid  darken($primary-color, 5%);
-        }
+        
+        @extend %resetBtn;
     }
     &__alert {
         margin-top: 15px;

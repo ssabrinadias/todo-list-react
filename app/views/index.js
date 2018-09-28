@@ -11,6 +11,7 @@ import Tasks, { dispatchTasks } from "../components/tasks";
 import Tags, { dispatchGetTags, tagsFilter } from "../components/tags";
 import Done, { doneFilter } from "../components/done";
 import NewTask, { NewTaskButton } from "../components/newTask";
+import NewTag, { NewTagButton } from "../components/newTag";
 
 class Home extends Component {
 	constructor(props) {
@@ -19,7 +20,8 @@ class Home extends Component {
 		this.state = {
 			filteredTasks: null,
 			dateShow: null,
-			modalNewTask: false
+			modalNewTask: false,
+			modalNewTag: false
 		};
 	}
 
@@ -68,7 +70,6 @@ class Home extends Component {
 	}
 
 	render() {
-		console.log(this.props.tasks);
 		let modalNewTaskClose = () =>
 			this.setState({
 				modalNewTask: false,
@@ -79,13 +80,24 @@ class Home extends Component {
 				modalNewTask: true,
 				editTask: id
 			});
+
+		let modalNewTagClose = () =>
+			this.setState({
+				modalNewTag: false
+			});
+		let modalNewTagOpen = id =>
+			this.setState({
+				modalNewTag: true
+			});
+
 		return (
 			<Layout>
 				<Container>
 					<Period />
+					<NewTagButton newTag={modalNewTagOpen} />
+					<NewTaskButton newTask={modalNewTaskOpen} />
 					<Date dateShow={this.state.dateShow} />
 					<Filter>
-						<NewTaskButton newTask={modalNewTaskOpen} />
 						<Tags tags={this.props.tags} />
 						<Done />
 					</Filter>
@@ -98,6 +110,8 @@ class Home extends Component {
 						onHide={modalNewTaskClose}
 						idTask={this.state.editTask}
 					/>
+
+					<NewTag show={this.state.modalNewTag} onHide={modalNewTagClose} />
 				</Container>
 			</Layout>
 		);

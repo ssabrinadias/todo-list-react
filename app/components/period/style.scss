@@ -3,12 +3,8 @@
 
 .period {
     display: flex;
-    justify-content: center;
-    flex: 1 100%;
-    @include breakpoint(medium) {
-        flex: 1;
-        justify-content: flex-start;
-    }
+    justify-content: flex-start;
+    flex: 1;
     &__btn{
         background: $primary-color;
         border: 1px solid  darken($primary-color, 5%);
